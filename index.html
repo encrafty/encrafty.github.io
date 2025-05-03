@@ -2,9 +2,54 @@
 <html>
 <head>
   <title>Encrafty</title>
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lec0SwrAAAAADdKXigJTmhL3I0WKxHQ4HigRgiD"></script>
+
 </head>
 <body>
   <h1>Hello, World!</h1>
   <p>Encrafty</p>
+
+  <form id="lead-form">
+    <label for="email">Your e‑mail:</label>
+    <input id="email" name="email" type="email" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById("lead-form");
+    const msgDiv = document.getElementById("message");
+    const FUNCTION_URL = "https://duvhjyczqgnjvdhpzuvk.functions.supabase.co/collectLead";
+    const RECAPTCHA_SITE_KEY = "6Lec0SwrAAAAADdKXigJTmhL3I0WKxHQ4HigRgiD";
+
+    form.addEventListener("submit", async (evt) => {
+      evt.preventDefault();
+      msgDiv.textContent = "Submitting…";
+
+      const email = form.email.value;
+      try {
+        // 1) get recaptcha token
+        const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "submit" });
+
+        // 2) post to our Edge Function
+        const resp = await fetch(FUNCTION_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, recaptchaToken: token })
+        });
+
+        const result = await resp.json();
+        if (!resp.ok) throw result.error || "Unknown error";
+
+        msgDiv.textContent = "Thank you! We'll be in touch.";
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        msgDiv.textContent = "Error: " + (err.message || err);
+      }
+    });
+  </script>
+
 </body>
 </html>
