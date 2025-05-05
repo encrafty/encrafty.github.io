@@ -22,25 +22,35 @@
     const msgDiv = document.getElementById("message");
     const FUNCTION_URL = "https://duvhjyczqgnjvdhpzuvk.functions.supabase.co/collectLead";
     const RECAPTCHA_SITE_KEY = "6Lec0SwrAAAAADdKXigJTmhL3I0WKxHQ4HigRgiD";
+    const ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1dmhqeWN6cWduanZkaHB6dXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MTg5NzcsImV4cCI6MjA2MTQ5NDk3N30.X_4aNftSdqqxhcysfm8uIPGUWNe9aGvBVUFC-2dCOzY"
 
     form.addEventListener("submit", async (evt) => {
       evt.preventDefault();
       msgDiv.textContent = "Submitting…";
 
+      
       const email = form.email.value;
       try {
         // 1) get recaptcha token
         const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "submit" });
 
+        console.log('token', token);
+        
         // 2) post to our Edge Function
         const resp = await fetch(FUNCTION_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            'apikey':ANON,
+            'Authorization': `Bearer ${ANON}` 
+          },
           body: JSON.stringify({ email, recaptchaToken: token })
         });
 
+        
         const result = await resp.json();
         if (!resp.ok) throw result.error || "Unknown error";
+console.log(result);
 
         msgDiv.textContent = "Thank you! We'll be in touch.";
         form.reset();
