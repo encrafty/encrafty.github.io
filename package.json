@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "dev": "vite"
+  },
   "devDependencies": {
     "supabase": "^2.22.6"
+  },
+  "dependencies": {
+    "vite": "^6.3.4"
   }
 }
