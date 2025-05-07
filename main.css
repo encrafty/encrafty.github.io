@@ -1,0 +1,274 @@
+:root {
+  --primary-green: #00c853;
+  /* Bright Green */
+  --primary-blue: #00253f;
+  /* Dark Navy Blue */
+  --text-color: #ffffff;
+  /* White text for contrast */
+  --background-color: #ffffff;
+  /* Light gray background */
+  --white: #ffffff;
+  /* White for text and inputs */
+  --light-gray: #f8f9fa;
+  /* Light gray background for inputs */ }
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box; }
+
+/* 2. Remove default margin */
+* {
+  margin: 0; }
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords; } }
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased; }
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%; }
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit; }
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word; }
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance; }
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate; }
+
+html {
+  font-family: "Arial", sans-serif;
+  font-size: 14px; }
+  @media (min-width: 1024px) {
+    html {
+      font-size: 16px; } }
+
+body {
+  background: var(--background-color);
+  color: var(--primary-blue); }
+
+p {
+  line-height: clamp(1.2, 1.5, 2);
+  font-size: 1rem;
+  margin-bottom: 10px; }
+
+h1 {
+  font-size: 3rem; }
+
+h2 {
+  font-size: 2.25rem; }
+
+h3 {
+  font-size: 1.75rem; }
+
+.color-blue {
+  color: var(--primary-blue); }
+
+.color-green {
+  color: var(--primary-green); }
+
+.container {
+  width: 100%;
+  max-width: 1280px; }
+
+.bold {
+  font-weight: bold; }
+
+.main-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden; }
+  .main-wrapper .main {
+    height: 100vh;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10px; }
+    @media (min-width: 1024px) {
+      .main-wrapper .main {
+        padding-top: 20px; } }
+  .main-wrapper .main-entry {
+    display: flex;
+    position: relative;
+    align-items: center;
+    z-index: 300;
+    height: 100%;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    align-content: flex-end;
+    gap: clamp(20px, 4vw, 30px); }
+    @media (min-width: 768px) {
+      .main-wrapper .main-entry {
+        align-content: start;
+        padding: 0 20px; } }
+    .main-wrapper .main-entry > section {
+      flex: 1 1 300px; }
+
+.navbar {
+  display: flex;
+  margin: 0 10px 10px;
+  z-index: 300;
+  line-height: 0; }
+  .navbar .logo {
+    display: inline-block;
+    width: fit-content; }
+    .navbar .logo > svg {
+      max-width: 150px;
+      width: 100%; }
+      @media (min-width: 1024px) {
+        .navbar .logo > svg {
+          max-width: none; } }
+    .navbar .logo h1 {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      overflow: hidden; }
+
+.call-to-action {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.3;
+  display: inline-block;
+  margin-bottom: 20px; }
+  @media (min-width: 1024px) {
+    .call-to-action {
+      font-size: 3.5rem;
+      margin-bottom: 70px; } }
+
+.description {
+  font-size: 1.5rem;
+  margin-bottom: 10px; }
+
+.sub-description, .description {
+  display: none; }
+  @media (min-width: 768px) {
+    .sub-description, .description {
+      display: block; } }
+
+.circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  aspect-ratio: 1/1;
+  background-color: #00fb68;
+  border-radius: 100%;
+  z-index: 200;
+  transform: translate(30%, 10%); }
+  @media (min-width: 1024px) {
+    .circle {
+      transform: translate(30%, -40%); } }
+
+.triangle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-green);
+  transform: translate(75%, 0) skewX(-45deg);
+  z-index: 100; }
+
+.form-wrapper {
+  background-color: rgba(0, 37, 63, 0.95);
+  color: var(--text-color);
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Light drop shadow */
+  max-width: 600px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto; }
+  @media (min-width: 1024px) {
+    .form-wrapper {
+      margin: 32px auto; } }
+  .form-wrapper .form-title {
+    color: var(--primary-green);
+    /* Green for headings */
+    margin-bottom: 15px;
+    font-size: 1.5rem; }
+  .form-wrapper p {
+    color: var(--primary-green);
+    /* Green for headings */
+    margin-bottom: 5px;
+    font-size: 16px; }
+  .form-wrapper ul {
+    padding-left: 10px;
+    text-align: left;
+    /* Left-align the bullet points */
+    list-style: inside;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px; }
+    .form-wrapper ul li {
+      margin-bottom: 8px; }
+
+#lead-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column; }
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 6px;
+  border: 2px solid var(--light-gray);
+  /* Light gray border */
+  font-size: 16px;
+  background-color: var(--light-gray);
+  /* Light gray background */ }
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-color: var(--primary-green);
+  /* Highlight border on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 200, 83, 0.4);
+  /* Soft green glow */ }
+
+button {
+  background-color: var(--primary-green);
+  /* Bright green background */
+  color: var(--white);
+  font-size: 16px;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 6px;
+  /* Rounded button */
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease-in-out; }
+  button:hover {
+    background-color: #00953e;
+    /* Darker green for hover */ }
+
+/*# sourceMappingURL=main.css.map */

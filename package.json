@@ -3,6 +3,7 @@
     "dev": "vite"
   },
   "devDependencies": {
+    "sass": "^1.87.0",
     "supabase": "^2.22.6"
   },
   "dependencies": {
