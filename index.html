@@ -141,6 +141,7 @@
     const ANON =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1dmhqeWN6cWduanZkaHB6dXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MTg5NzcsImV4cCI6MjA2MTQ5NDk3N30.X_4aNftSdqqxhcysfm8uIPGUWNe9aGvBVUFC-2dCOzY";
 
+
     form.addEventListener("submit", async (evt) => {
         evt.preventDefault();
         msgDiv.textContent = "Submitting…";
@@ -166,7 +167,9 @@
             const result = await resp.json();
 
             console.log('result', result)
-            if (!resp.ok) throw result.error || "Unknown error";
+            if (!resp.ok) throw new Error(result.message || "Unknown error");
+
+
 
             msgDiv.textContent = "Thank you! We'll be in touch.";
             form.reset();
@@ -174,6 +177,8 @@
             console.error(err);
             msgDiv.textContent = "Error: " + (err.message || err);
         }
+
+        await (new Promise(() => setTimeout(() => msgDiv.textContent = '', 3000)))
     });
 </script>
 </body>
